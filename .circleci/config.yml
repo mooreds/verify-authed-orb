@@ -7,7 +7,7 @@ commands:
         type: string
         default: "World"
     steps:
-      - run: echo "hello " << parameters.to >>
+      - run: echo hello << parameters.to >>
 orbs:
     hello: circleci/hello-build@0.0.5
 workflows:
