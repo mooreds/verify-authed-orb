@@ -21,4 +21,4 @@ jobs:
     steps:
       - sayhello:
           to: "Dan"
-      - sayhello:
+      - sayhello
