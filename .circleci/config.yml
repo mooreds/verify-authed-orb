@@ -5,9 +5,9 @@ commands:
     parameters:
       to:
         type: string
-        default: "Hello World"
+        default: "World"
     steps:
-      - run: echo << parameters.to >>
+      - run: echo "hello " << parameters.to >>
 orbs:
     hello: circleci/hello-build@0.0.5
 workflows:
@@ -21,3 +21,4 @@ jobs:
     steps:
       - sayhello:
           to: "Dan"
+      - sayhello:
