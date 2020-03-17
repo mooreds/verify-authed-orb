@@ -5,22 +5,25 @@ commands:
     parameters:
       username:
         type: string
-        default: "user"
+        default: "user" 
+        description: "Fusionauth username to try to validate"
       applicationid:
         type: string
         default: "appid"
+        description: "Fusionauth application id"
       hostbaseurl:
         type: string
         default: "http://ec2-52-35-2-20.us-west-2.compute.amazonaws.com:9011/"
+        description: "Fusionauth hostname url"
       password_env_var_name:
         type: env_var_name
         default: BUILDER_PASS
+        description: "The user's Fusionauth password is stored in this environment variable"
       fusionauth_api_key_env_var_name:
         type: env_var_name
         default: FUSION_AUTH_API
+        description: "The Fusionauth API key is stored in this environment variable"
     steps:
-      #- run: |
-         #curl http://www.mooreds.com/aaaaa?$BUILDER_PASS
       - run: |
          curl -s -o /dev/null -w "%{http_code}"   -XPOST -H "Authorization: ${<< parameters.fusionauth_api_key_env_var_name >>}"  -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "'${<< parameters.password_env_var_name >>}'", "applicationId": "<< parameters.applicationid >>" }' << parameters.hostbaseurl >>api/login |grep 202 > /dev/null
       - run: |
