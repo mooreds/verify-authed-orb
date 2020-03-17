@@ -32,7 +32,7 @@ commands:
       - run: |
          echo User authorized
 workflows:
-    "Build Image":
+    "Test workflow":
         jobs:
           - verifyauthorization
 jobs:
