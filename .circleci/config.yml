@@ -1,7 +1,7 @@
 version: 2.1
 commands:
   verifyauth:
-    description: "Authenticates against a fusionauth database"
+    description: "Authenticates a user against a Fusionauth server. If the user can login, the build continues, otherwise the build fails."
     parameters:
       username:
         type: string
@@ -28,8 +28,6 @@ commands:
          curl -s -o /dev/null -w "%{http_code}"   -XPOST -H "Authorization: ${<< parameters.fusionauth_api_key_env_var_name >>}"  -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "'${<< parameters.password_env_var_name >>}'", "applicationId": "<< parameters.applicationid >>" }' << parameters.hostbaseurl >>api/login |grep 202 > /dev/null
       - run: |
          echo User authorized
-orbs:
-    hello: circleci/hello-build@0.0.5
 workflows:
     "Build Image":
         jobs:
@@ -37,7 +35,7 @@ workflows:
 jobs:
   verifyauthorization:
     docker:
-      - image: "circleci/node:9.6.1"
+      - image: "cimg/base:2020.01"
     steps:
       - verifyauth:
           username: "circlecimoored"
