@@ -32,3 +32,4 @@ jobs:
     steps:
       - verifyauth:
           username: "circlecimooreds"
+          password: $BUILDER_PASS
