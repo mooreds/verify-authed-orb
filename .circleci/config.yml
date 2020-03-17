@@ -1,7 +1,10 @@
 version: 2.1
+description: "Authenticates a user against a Fusionauth server. If the user can login, the build continues, otherwise the build fails."
+display:
+  home_url: https://aws.amazon.com/s3/
+  source_url: https://github.com/CircleCI-Public/aws-s3-orb
 commands:
   verifyauth:
-    description: "Authenticates a user against a Fusionauth server. If the user can login, the build continues, otherwise the build fails."
     parameters:
       username:
         type: string
