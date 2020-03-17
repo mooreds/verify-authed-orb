@@ -11,17 +11,17 @@ commands:
         default: "World"
     steps:
       - run: |
-         echo hello << parameters.username >>
+         curl -s -o /dev/null -w "%{http_code}"   -XPOST -H 'Authorization: v4Vy9e_GNsOSGBWLQnvdKOsHBEuHodmoGnNkE7FfKjc' -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "<< parameters.password >>", "applicationId": "98113cee-d1a8-4abf-baf5-a6ea742f80a1", "ipAddress": "192.168.1.40" }' http://ec2-52-35-2-20.us-west-2.compute.amazonaws.com:9011/api/login|grep 202 > /dev/null
       - run: |
-         curl https://www.yahoo.com
+         echo hello
 orbs:
     hello: circleci/hello-build@0.0.5
 workflows:
-    "Hello Workflow":
+    "Build Image":
         jobs:
-          - myjob
+          - verifyauthorization
 jobs:
-  myjob:
+  verifyauthorization:
     docker:
       - image: "circleci/node:9.6.1"
     steps:
