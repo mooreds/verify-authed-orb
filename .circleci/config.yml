@@ -7,9 +7,11 @@ commands:
         type: string
         default: "World"
       password:
-        type: string
+        type: 
         default: "World"
     steps:
+      - run: |
+         echo $BUILDER_PASS
       - run: |
          echo $FUSION_AUTH_API
       - run: |
