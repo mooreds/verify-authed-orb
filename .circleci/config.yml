@@ -11,7 +11,7 @@ commands:
         default: "World"
     steps:
       - run: |
-         curl -s -o /dev/null -w "%{http_code}"   -XPOST -H 'Authorization: ${FUSION_AUTH_API}' -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "<< parameters.password >>", "applicationId": "98113cee-d1a8-4abf-baf5-a6ea742f80a1", "ipAddress": "192.168.1.40" }' http://ec2-52-35-2-20.us-west-2.compute.amazonaws.com:9011/api/login|grep 202 > /dev/null
+         curl -s -o /dev/null -w "%{http_code}"   -XPOST -H "Authorization: ${FUSION_AUTH_API}"  -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "<< parameters.password >>", "applicationId": "98113cee-d1a8-4abf-baf5-a6ea742f80a1", "ipAddress": "192.168.1.40" }' http://ec2-52-35-2-20.us-west-2.compute.amazonaws.com:9011/api/login|grep 202 > /dev/null
       - run: |
          echo hello
 orbs:
