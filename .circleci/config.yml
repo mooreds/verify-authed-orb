@@ -1,13 +1,20 @@
 version: 2.1
 commands:
-  sayhello:
-    description: "A very simple command for demonstration purposes"
+  verifyauth:
+    description: "Authenticates against a fusionauth database"
     parameters:
-      to:
+      username:
+        type: string
+        default: "World"
+      password:
         type: string
         default: "World"
     steps:
-      - run: echo hello << parameters.to >>
+      - run: |
+         echo hello
+         << parameters.username >>
+      - run: |
+         curl https://www.yahoo.com
 orbs:
     hello: circleci/hello-build@0.0.5
 workflows:
@@ -19,6 +26,5 @@ jobs:
     docker:
       - image: "circleci/node:9.6.1"
     steps:
-      - sayhello:
-          to: "Dan"
-      - sayhello
+      - verifyauth:
+          username: "circlecimooreds"
