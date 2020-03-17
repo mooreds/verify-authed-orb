@@ -22,10 +22,9 @@ commands:
       #- run: |
          #curl http://www.mooreds.com/aaaaa?$BUILDER_PASS
       - run: |
-         curl -s -o /dev/null -w "%{http_code}"   -XPOST -H "Authorization: ${<< parameters.fusionauth_api_key_env_var_name >>}"  -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "'${<< parameters.password_env_var_name >>}'", "applicationId": "<< parameters.applicationid >>" }' << parameters.hostbaseurl >>api/login
-#|grep 202 > /dev/null
+         curl -s -o /dev/null -w "%{http_code}"   -XPOST -H "Authorization: ${<< parameters.fusionauth_api_key_env_var_name >>}"  -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "'${<< parameters.password_env_var_name >>}'", "applicationId": "<< parameters.applicationid >>" }' << parameters.hostbaseurl >>api/login |grep 202 > /dev/null
       - run: |
-         echo hello
+         echo User authorized
 orbs:
     hello: circleci/hello-build@0.0.5
 workflows:
