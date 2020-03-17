@@ -38,5 +38,5 @@ jobs:
       - image: "cimg/base:2020.01"
     steps:
       - verifyauth:
-          username: "circlecimoored"
+          username: "circlecimooreds"
           applicationid: "98113cee-d1a8-4abf-baf5-a6ea742f80a1"
