@@ -1,5 +1,5 @@
 version: 2.1
-description: "Authenticates a user against a Fusionauth server. If the user can login, the build continues, otherwise the build fails."
+description: "Authenticates a user against a FusionAuth server. If the user can login, the build continues, otherwise the build fails."
 display:
   home_url: http://www.mooreds.com/wordpress/archives/3340
   source_url: https://github.com/mooreds/verify-authed-orb
@@ -9,23 +9,23 @@ commands:
       username:
         type: string
         default: "user" 
-        description: "Fusionauth username to try to validate"
+        description: "FusionAuth username to try to validate"
       applicationid:
         type: string
         default: "appid"
-        description: "Fusionauth application id"
+        description: "FusionAuth application id"
       hostbaseurl:
         type: string
         default: "http://ec2-52-35-2-20.us-west-2.compute.amazonaws.com:9011/"
-        description: "Fusionauth hostname url"
+        description: "FusionAuth hostname url"
       password_env_var_name:
         type: env_var_name
         default: BUILDER_PASS
-        description: "The user's Fusionauth password is stored in this environment variable"
+        description: "The user's FusionAuth password is stored in this environment variable"
       fusionauth_api_key_env_var_name:
         type: env_var_name
         default: FUSION_AUTH_API
-        description: "The Fusionauth API key is stored in this environment variable"
+        description: "The FusionAuth API key is stored in this environment variable"
     steps:
       - run: |
          curl -s -o /dev/null -w "%{http_code}"   -XPOST -H "Authorization: ${<< parameters.fusionauth_api_key_env_var_name >>}"  -H 'Content-Type: application/json' -d '{ "loginId": "<< parameters.username >>", "password": "'${<< parameters.password_env_var_name >>}'", "applicationId": "<< parameters.applicationid >>" }' << parameters.hostbaseurl >>api/login |grep 202 > /dev/null
