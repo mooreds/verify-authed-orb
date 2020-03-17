@@ -7,7 +7,7 @@ commands:
         type: string
         default: "World"
       password:
-        type: 
+        type: string
         default: "World"
     steps:
       - run: |
